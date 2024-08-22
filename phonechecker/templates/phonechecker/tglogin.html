@@ -1,0 +1,23 @@
+{% extends 'phonechecker/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block heading %}
+Telethon Login
+{% endblock heading %}
+
+{% block content %}
+
+<form action="{% url 'tglogin' %}" method="post">
+    {% csrf_token %}
+    {% crispy form1 %}
+</form>
+
+<form action="{% url 'tglogin' %}" method="post">
+    {% csrf_token %}
+    {% crispy form2 %}
+</form>
+
+<p>If you are already logged in, skip to <a href='/admin/phonechecker/check/'>result page</a></p>
+
+{% endblock content %}

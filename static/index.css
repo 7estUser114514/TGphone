@@ -1,0 +1,48 @@
+body {
+    background-color: #3d3838;
+    font-family: Arial, sans-serif;
+  }
+
+
+  
+  .container {
+    position: absolute; /* 使用绝对定位 */
+    top: 50%; /* 从顶部偏移50% */
+    left: 50%; /* 从左侧偏移50% */
+    transform: translate(-50%, -50%); /* 使用负偏移的transform */
+  
+    width: 800px;
+    height: 200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* 添加圆角 */
+  }
+
+  .container a {
+    position: absolute; /* 使用绝对定位 */
+    top: -20%; /* 从顶部偏移50% */
+    left: 50%; /* 从左侧偏移50% */
+    transform: translate(-50%, -50%); /* 使用负偏移的transform */
+    text-decoration: none;
+
+    font-size: 45px;
+    /* text-align: center; */
+    color: #fff;
+    /* color: #e1b667; */
+
+  }
+  .container a:hover {
+    background-color: transparent;
+    color: #e1b667;
+    text-decoration: underline;
+    transition: all 1s;
+    /* cursor: default; */
+  }
+  
+  .operation-box {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }

@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Website Title</title>
-  <script type = "text/javascript" src = "/static/index.js" ></script>
+  <title>TG手机号查询</title>
+  <link rel="stylesheet" type="text/css" href="static/layui.css">
   <link rel="stylesheet" type="text/css" href="static/index.css">
+  <script type="text/javascript" src="/static/layui.js"></script>
+  <script type="text/javascript" src="/static/index.js"></script>
 </head>
+
 <body>
   <div class="container">
-   <h1><a href="/">TG Phone Checker</a></h1>
+    <h1><a href="/">TG Phone Checker</a></h1>
+    <div class="layui-form" id="search-form">
+      <div class="layui-form-item">
+        <div class="layui-col-md5" >
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-cellphone-fine"></i>
+            </div>
+            <input type="text" name="phone" value="" lay-verify="required" placeholder="单个手机号查询" lay-reqtext="请填写手机号"
+              autocomplete="off" class="layui-input" id="search-input" >
+            <div class="layui-input-affix layui-input-suffix"><i class="layui-icon layui-icon-search"
+                id="search" ></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- <div class="operation-box">
-      123
-    </div> -->
+    <hr class="layui-border-green">
+
   </div>
 </body>
+
 </html>

@@ -61,17 +61,15 @@
     layui.use(function () {
       var upload = layui.upload;
       var $ = layui.$;
-      // 渲染
       upload.render({
         elem: '#upload-drag',
         url: '/upload',
         exts: 'txt',
         text: {
-          "data-format-error": "选择的文件不是txt文本, 请点击左侧下载样例看看吧", // 数据格式错误的提示
-          "check-error": "选择的文件不是txt文本, 请点击左侧下载样例看看吧", // 文件格式校验失败的提示
-          "error": "上传失败, 请重启服务或联系管理员", // 上传失败的提示
+          "data-format-error": "选择的文件不是txt文本, 请点击左侧下载样例看看吧",
+          "check-error": "选择的文件不是txt文本, 请点击左侧下载样例看看吧",
+          "error": "上传失败, 请重启服务或联系管理员",
         },
-
         done: function (res) {
           if (res.code == 0) {
             layer.msg('上传成功');

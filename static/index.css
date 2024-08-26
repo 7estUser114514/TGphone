@@ -51,11 +51,20 @@ body {
   /* cursor: default; */
 }
 
-.operation-box {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 20px;
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.box.side {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
 
 .centered-div {
   display: flex;
@@ -64,4 +73,27 @@ body {
   height: 70px;
   white-space: nowrap;
   /* 可以调整为适合的高度 */
+}
+
+.condiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  /* 或者你可以使用固定宽度或其他方式来调整宽度 */
+}
+
+.outer-condiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* 让外部容器占据整个屏幕宽度 */
+}
+
+.center-display {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

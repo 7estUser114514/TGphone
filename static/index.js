@@ -1,16 +1,17 @@
 var layer = layui.layer
 var form = layui.form;
 
-function sayHello() {
-    alert("Hello!")
-}
 function checkAccount() {
-    return localStorage.getItem("apiId") !== null && localStorage.getItem("apiHash")
+
+    if (!(localStorage.getItem("apiId") !== null && localStorage.getItem("apiHash"))) {
+        alertBind();
+        return true;
+    }
 }
 
 function saveAccount(field) {
-    localStorage.setItem("apiId", field.id)
-    localStorage.setItem("apiHash", field.hash)
+    localStorage.setItem("apiId", field.id);
+    localStorage.setItem("apiHash", field.hash);
 }
 
 function islegal(field) {
@@ -63,6 +64,7 @@ function alertBind() {
                     saveAccount(field);
                     layer.closeLast();
                     layer.msg('绑定成功', { icon: 6 });
+                    location.reload();
                 } else {
                     layer.closeLast();
                     layer.msg('绑定失败: 参数不合法', { icon: 5 });
@@ -75,6 +77,9 @@ function alertBind() {
 }
 
 function checkPhone(phone) {
+    if (checkAccount()) {
+        return false;
+    }
     // 请求对应后端获取结果
     var result = {
         "phone": phone,
@@ -111,8 +116,6 @@ function addListeners() {
 }
 
 window.onload = function () {
+    checkAccount();
     addListeners();
-    if (!checkAccount()) {
-        alertBind()
-    }
 }

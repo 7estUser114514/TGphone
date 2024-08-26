@@ -14,23 +14,76 @@
     <h1><a href="/">TG Phone Checker</a></h1>
     <div class="layui-form" id="search-form">
       <div class="layui-form-item">
-        <div class="layui-col-md5" >
+        <div class="layui-col-md5">
           <div class="layui-input-wrap">
             <div class="layui-input-prefix">
               <i class="layui-icon layui-icon-cellphone-fine"></i>
             </div>
             <input type="text" name="phone" value="" lay-verify="required" placeholder="单个手机号查询" lay-reqtext="请填写手机号"
-              autocomplete="off" class="layui-input" id="search-input" >
-            <div class="layui-input-affix layui-input-suffix"><i class="layui-icon layui-icon-search"
-                id="search" ></i></div>
+              autocomplete="off" class="layui-input" id="search-input">
+            <div class="layui-input-affix layui-input-suffix"><i class="layui-icon layui-icon-search" id="search"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <hr class="layui-border-green">
-
+    <div class="outer-condiv">
+      <div class="condiv">
+        <div class="box side">
+          <div class="center-display">
+            <button type="button" class="layui-btn layui-btn-primary layui-border-green">下载样例</button>
+          </div>
+          <div class="center-display">
+            <button class="layui-btn layui-btn-primary layui-border-blue">历史记录</button>
+          </div>
+        </div>
+        <div class="box">
+          <div class="layui-upload-drag" style="display: inline-block;" id="upload-drag">
+            <i class="layui-icon layui-icon-upload"></i>
+            <div>多个手机号批量查询（可在左侧下载样例）</div>
+          </div>
+        </div>
+        <div class="box side">
+          <div class="center-display">
+            <button class="layui-btn layui-btn-primary layui-border-orange">更改绑定</button>
+          </div>
+          <div class="center-display">
+            <button class="layui-btn layui-btn-primary layui-border-red">取消绑定</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    layui.use(function () {
+      var upload = layui.upload;
+      var $ = layui.$;
+      // 渲染
+      upload.render({
+        elem: '#upload-drag',
+        url: '/upload',
+        exts: 'txt',
+        text: {
+          "data-format-error": "选择的文件不是txt文本, 请点击左侧下载样例看看吧", // 数据格式错误的提示
+          "check-error": "选择的文件不是txt文本, 请点击左侧下载样例看看吧", // 文件格式校验失败的提示
+          "error": "上传失败, 请重启服务或联系管理员", // 上传失败的提示
+        },
+
+        done: function (res) {
+          if (res.code == 0) {
+            layer.msg('上传成功');
+          } else {
+            layer.msg('上传失败, 请重启服务或联系管理员');
+
+          }
+        }
+      });
+    });
+  </script>
+
 </body>
 
 </html>

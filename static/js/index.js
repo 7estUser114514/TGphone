@@ -245,7 +245,6 @@ function clearHistory() {
 }
 
 function saveHistory() {
-    // 发起请求并下载 db 文件
     const link = document.createElement('a');
     link.href = '/saveHistory';
     link.download = 'history.db';

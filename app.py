@@ -1,4 +1,3 @@
-import os
 import sqlite3
 from py.check import check_tg
 import webbrowser

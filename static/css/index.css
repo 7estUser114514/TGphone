@@ -1,0 +1,99 @@
+body {
+  background-color: #3d3838;
+  font-family: Arial, sans-serif;
+}
+
+
+
+.container {
+  position: absolute;
+  /* 使用绝对定位 */
+  top: 50%;
+  /* 从顶部偏移50% */
+  left: 50%;
+  /* 从左侧偏移50% */
+  transform: translate(-50%, -50%);
+  /* 使用负偏移的transform */
+
+  width: 800px;
+  height: 200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  /* 添加圆角 */
+}
+
+.container a {
+  position: absolute;
+  /* 使用绝对定位 */
+  top: -20%;
+  /* 从顶部偏移50% */
+  left: 50%;
+  /* 从左侧偏移50% */
+  transform: translate(-50%, -50%);
+  /* 使用负偏移的transform */
+  text-decoration: none;
+
+  font-size: 45px;
+  /* text-align: center; */
+  color: #fff;
+  /* color: #e1b667; */
+
+}
+
+.container a:hover {
+  background-color: transparent;
+  color: #e1b667;
+  text-decoration: underline;
+  transition: all 1s;
+  /* cursor: default; */
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box.side {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+
+.centered-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  white-space: nowrap;
+  /* 可以调整为适合的高度 */
+}
+
+.condiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  /* 或者你可以使用固定宽度或其他方式来调整宽度 */
+}
+
+.outer-condiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* 让外部容器占据整个屏幕宽度 */
+}
+
+.center-display {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

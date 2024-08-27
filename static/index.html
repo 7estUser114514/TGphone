@@ -33,7 +33,8 @@
       <div class="condiv">
         <div class="box side">
           <div class="center-display">
-            <button type="button" class="layui-btn layui-btn-primary layui-border-green" onclick="downloadExample()">下载样例</button>
+            <button type="button" class="layui-btn layui-btn-primary layui-border-green"
+              onclick="downloadExample()">下载样例</button>
           </div>
           <div class="center-display">
             <button class="layui-btn layui-btn-primary layui-border-blue" onclick="openHistory()">历史记录</button>
@@ -70,9 +71,42 @@
           "check-error": "选择的文件不是txt文本, 请点击左侧下载样例看看吧",
           "error": "上传失败, 请重启服务或联系管理员",
         },
+        data: {
+          'api_id': localStorage.getItem("apiId"),
+          'api_hash': localStorage.getItem("apiHash"),
+          'proxy': localStorage.getItem("proxyAddr")
+        },
+        before: function () {
+          if (checkAccount()) {
+            return false;
+          }
+        },
         done: function (res) {
           if (res.code == 0) {
-            layer.msg('上传成功');
+            var result = res.ret;
+            var ret;
+            content = `
+            <div style="padding: 15px;">`
+            result.forEach(function (item) {
+              ret = (item.status == 0) ? "已经在Telegrame上注册" : "还未在Telegram上注册"
+              content += `
+                    <fieldset class="layui-elem-field">
+                    <legend>${item.phone}</legend>
+                    <div class="layui-field-box">
+                        ${ret}
+                    </div>
+                    </fieldset>
+              `
+            });
+            content += `</div>`
+            layer.open({
+              type: 1,
+              area: ['420px', '280px'],
+              title: false,
+              closeBtn: 0,
+              shadeClose: true,
+              content: content
+            });
           } else {
             layer.msg('上传失败, 请重启服务或联系管理员');
 

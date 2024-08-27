@@ -2,13 +2,13 @@ import os
 import sqlite3
 from py.check import check_tg
 import webbrowser
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
+
 
 def initial():
    conn = sqlite3.connect('history.db')
    c = conn.cursor()
 
-   # 创建名为 history 的表
    c.execute('''CREATE TABLE IF NOT EXISTS history
              (phone TEXT, status TEXT)''')
    conn.commit()
@@ -22,39 +22,54 @@ def add_history(data):
    conn.commit()
    conn.close()
 
+
 app = Flask(__name__)
+
 
 @app.route("/")
 def index():
    return app.send_static_file("index.html")
 
+
 @app.route("/checkPhone", methods=['POST'])
 def check_phone():
-   res_text = '已注册'
+   ret_text = '已注册'
    phone = request.form.get('phone')
    api_id = request.form.get('api_id')
    api_hash = request.form.get('api_hash')
    proxy = request.form.get('proxy')
-   res = check_tg(phone, api_id, api_hash)
-   if res != 0:
-      res_text = '未注册'
-   data = [(str(phone), res_text)]
+   ret = check_tg(phone, api_id, api_hash)
+   if ret != 0:
+      ret_text = '未注册'
+   data = [(str(phone), ret_text)]
    add_history(data)
-   return jsonify({'code': 0, 'status': res})
+   return jsonify({'code': 0, 'ret': {'phone': phone, 'status': ret}})
 
 
 @app.route("/upload", methods=['POST'])
 def upload():
    if 'file' not in request.files:
         return jsonify({'code': 1})
+   api_id = request.form.get('api_id')
+   api_hash = request.form.get('api_hash')
+   proxy = request.form.get('proxy')
 
    file = request.files['file']
 
-   if file.filename == '':
-      return jsonify({'code': 1})
+   lines = [ line.decode('utf-8').strip("\n").strip("\r") for line in file.stream.readlines()]
+   data = []
+   ret = []
+   for line in lines:
+      status = check_tg(line, api_id, api_hash)
+      status_text = "已注册"
+      if status != 0:
+         status_text = '未注册'
+      data.append((line, status_text))
+      ret.append({'phone': line, 'status': status_text})
+   add_history(data)
 
-   file.save(os.path.join('upload', 'phones.txt'))
-   return jsonify({'code': 0})
+   return jsonify({'code': 0, 'ret': ret})
+
 
 @app.route("/showHistory")
 def show_history():
@@ -71,6 +86,23 @@ def show_history():
    conn.close()
 
    return jsonify({'code': 0, 'ret': history})
+
+
+@app.route("/clearHistory")
+def clear_history():
+   conn = sqlite3.connect('history.db')
+   cursor = conn.cursor()
+
+   cursor.execute('DELETE FROM history')
+
+   conn.commit()
+   conn.close()
+   return jsonify({'code': 0})
+
+
+@app.route("/saveHistory")
+def save_history():
+   return send_file("history.db", as_attachment=True)
 
 
 if __name__ == '__main__':

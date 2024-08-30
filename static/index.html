@@ -86,7 +86,14 @@
             var result = res.ret;
             var ret;
             content = `
-            <div style="padding: 15px;">`
+            <div style="padding: 15px;">
+              <fieldset class="layui-elem-field layui-field-title">
+                <legend>批量查询结果</legend>
+              </fieldset>
+              <blockquote class="layui-elem-quote" >
+                可在历史记录里面导出excel结果
+              </blockquote>
+              `
             result.forEach(function (item) {
               ret = (item.status == 0) ? "已经在Telegrame上注册" : "还未在Telegram上注册"
               content += `

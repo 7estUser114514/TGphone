@@ -190,7 +190,13 @@ function openHistory() {
                 <fieldset class="layui-elem-field layui-field-title">
                 <legend>历史查询记录</legend>
                 </fieldset>
+                <blockquote class="layui-elem-quote" >
+                    如果觉得记录太杂乱可以先清空然后重新查询后导出
+                </blockquote>
                 <div style="text-align: right;">
+                    <button type="button" class="layui-btn layui-btn-sm" onclick="downloadExcel()">
+                        <i class="layui-icon layui-icon-left"></i> 导出记录
+                    </button>
                     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick="saveHistory()">
                         <i class="layui-icon layui-icon-download-circle"></i> 保存记录
                     </button>
@@ -252,6 +258,15 @@ function saveHistory() {
     link.click();
     document.body.removeChild(link);
 
+}
+
+function downloadExcel() {
+    const link = document.createElement('a');
+    link.href = '/downloadExcel';
+    link.download = 'history.xlsx';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 window.onload = function () {

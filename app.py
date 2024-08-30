@@ -1,6 +1,7 @@
 import sqlite3
-from py.check import check_tg
 import webbrowser
+import pandas as pd
+from py.check import check_tg
 from flask import Flask, request, jsonify, send_file
 
 
@@ -102,6 +103,18 @@ def clear_history():
 @app.route("/saveHistory")
 def save_history():
    return send_file("history.db", as_attachment=True)
+
+@app.route("/downloadExcel")
+def download_excel():
+   conn = sqlite3.connect('history.db')
+
+   query = "SELECT * FROM history"
+   df = pd.read_sql_query(query, conn)
+
+   df.to_excel('history.xlsx', index=False)
+
+   conn.close()
+   return send_file("history.xlsx", as_attachment=True)
 
 
 if __name__ == '__main__':
